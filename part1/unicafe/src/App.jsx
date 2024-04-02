@@ -6,10 +6,11 @@ const Statistics = (props) => {
   return(
     <div>
       <StatisticLine  text='good' value={props.good}/>
-      <StatisticLine  text='neutral' value={neutral}/>
-      <StatisticLine  text='bad' value={bad}/>
-      <StatisticLine  text='average' value={average} unit='%'/>
-      <StatisticLine  text='positive' value={positive} unit='%'/>
+      <StatisticLine  text='neutral' value={props.neutral}/>
+      <StatisticLine  text='bad' value={props.bad}/>
+      <StatisticLine  text='average' value={props.average}/>
+      <StatisticLine  text='positive' value={props.positive}/>
+      
     </div>
   )
 }
@@ -27,9 +28,9 @@ const App = () => {
   const handleClick = (text) => () =>{
     if (text == 'good')
       setGood(good + 1)
-    if (text === 'neutral')
-      setBad(bad + 1) 
     if (text === 'bad')
+      setBad(bad + 1) 
+    if (text === 'neutral')
       setNeutral(neutral + 1)
     if (show === false)
       setShow(true) 
@@ -47,11 +48,7 @@ const App = () => {
       <Button handleClick={handleClick('bad')} text='bad' />
       <h1>StatisticLine </h1>
       {show && <div>
-        <StatisticLine  text='good' value={good}/>
-        <StatisticLine  text='neutral' value={neutral}/>
-        <StatisticLine  text='bad' value={bad}/>
-        <StatisticLine  text='average' value={average} unit='%'/>
-        <StatisticLine  text='positive' value={positive} unit='%'/>
+        <Statistics good = {good} bad = {bad} neutral={neutral} average={average} positive={positive}/>
       </div>}
       {!show && <p>no feedback given</p>}
     </div>
