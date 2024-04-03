@@ -57,12 +57,26 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
    
+  const [vote, setVote] = useState(Array(anecdotes.length).fill(0))
+
   const handleAnecdoteClick = () =>{
-    let updateSelected = Math.floor((Math.random()*anecdotes.length))
-    console.log(updateSelected)
-    setSelected(updateSelected)
+    let updatedSelected = Math.floor((Math.random()*anecdotes.length))
+    console.log(updatedSelected)
+    setSelected(updatedSelected)
   }
   
+  const handleVoteClick = () => {
+    const updatedVote = [...vote]
+    updatedVote[selected] = vote[selected]+1
+    setVote(updatedVote)
+    console.log(updatedVote)
+    
+  }
+
+  const mostVotes = () => {
+    const mostVotedIndex = vote.indexOf(Math.max(...vote))
+    return anecdotes[mostVotedIndex]
+  }
 
   return (
 
@@ -76,8 +90,13 @@ const App = () => {
         <Statistics good = {good} bad = {bad} neutral={neutral} average={average} positive={positive}/>
       </div>}
       {!show && <p>no feedback given</p>}
+      <h1>Annecdote of the Day</h1>
+      <p>{anecdotes[selected]} has {vote[selected]} votes.</p>
+      <button onClick={handleVoteClick}>vote</button>
       <button onClick={handleAnecdoteClick}>next anecdote</button>
-      <p>{anecdotes[selected]}</p>
+      <h1>Annecdote with the most votes</h1>
+      <p>{mostVotes()}</p>
+      
     </div>
   )
 }
