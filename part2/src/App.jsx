@@ -1,4 +1,5 @@
 import Course from "./components/Course"
+import Redux from "./components/Redux"
 
 const App = () => {
   const course = {
@@ -28,6 +29,7 @@ const App = () => {
         {course.parts.map(part => (
               <Course key={part.id} part={part}/>
             ))}
+      <Redux parts={course.parts}/>
     </div>
   )
 
