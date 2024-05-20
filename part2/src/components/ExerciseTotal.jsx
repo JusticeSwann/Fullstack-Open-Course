@@ -1,5 +1,5 @@
 
-const Redux = ({parts}) => {
+const ExerciseTotal = ({parts}) => {
     const totalExercises = parts.reduce((total, part) => total + part.exercises, 0);
     return(
         <b>
@@ -8,4 +8,4 @@ const Redux = ({parts}) => {
     )
 }
 
-export default Redux
+export default ExerciseTotal
