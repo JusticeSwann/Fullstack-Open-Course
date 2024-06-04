@@ -12,40 +12,12 @@ const App = () => {
   const [filter, setFilter] = useState('')
 
 
-  const addNewPerson = (event) => {
-    event.preventDefault()
-    if (!duplicateFound()){
-      const personObject = {
-        name: newName, number: newNumber,
-      }
-      setPersons(persons.concat(personObject))
-    }else{
-      alert('${newName} is already added to phonebook')
-    }
-    
-  }
-
-  const duplicateFound = () => {
-    const check = persons.filter((person) => person.name === newName)
-    console.log('debug:', check)
-    return check.length > 0
-  }
-
-  const handleNewNameChange = (event) => {
-    console.log(event.target.value)
-    setNewName(event.target.value)
-  }
-
-  const handleNewNumberChange = (event) => {
-    console.log(event.target.value)
-    setNewNumber(event.target.value)
-  }
 
   return (
     <div>
       
       <Search filter={filter} setFilter={setFilter}/>
-      <AddNewPerson persons={persons} setPersons={setPersons} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewName}/>
+      <AddNewPerson persons={persons} setPersons={setPersons} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber}/>
       <Phonebook persons={persons} filter={filter}/>
     </div>
   )
