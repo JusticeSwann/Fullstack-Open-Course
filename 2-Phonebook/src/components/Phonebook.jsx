@@ -1,22 +1,6 @@
-import axios from "axios"
-import phonebookService from "../services/phonebook"
-
-
-
-const Phonebook = ({persons,setPersons,filter}) => {
+const Phonebook = ({persons,toggleButton,filter}) => {
 
   const personsToShow = persons.filter(person => person.name.includes(filter))
-  
-  const baseUrl = 'http://localhost:3001/persons'
-
-  const toggleButton = (id) => {
-    phonebookService
-      .remove(id)
-      .then(
-        setPersons(persons.filter(n => n.id !== id))
-      )
-    
-  }
 
   return(
     <>

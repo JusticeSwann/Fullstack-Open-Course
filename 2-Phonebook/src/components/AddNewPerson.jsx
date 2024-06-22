@@ -4,10 +4,10 @@ const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setN
     
     const addNewPerson = (event) => {
         event.preventDefault()
+        const personObject = {
+          name: newName, number: newNumber,
+        }
         if (!duplicateFound()){
-          const personObject = {
-            name: newName, number: newNumber,
-          }
           phonebookService
             .create(personObject)
             .then(returnedPerson => {
@@ -16,7 +16,18 @@ const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setN
               setNewNumber=''
             })
         }else{
-          alert('${newName} is already added to phonebook')
+          if (confirm(`${newName} is already added to phonebook. would you like to update their number?`)){
+            const person = persons.filter(n => n.name === newName)
+            const id = person[0].id
+            console.log(id)
+            phonebookService
+              .update(id,personObject)
+              .then(returnedPerson =>{
+                setPersons(persons.filter(n => n.id !== id).concat(returnedPerson))
+            })
+          }else{
+            console.log('no')
+          }
         }
         
       }

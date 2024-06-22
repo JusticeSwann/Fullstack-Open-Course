@@ -20,8 +20,12 @@ const App = () => {
       })
   },[])
 
-  const toggleDeleteButton = id => {
-    phonebookService.remove(id)
+  const toggleDeleteButton = (id) => {
+    phonebookService
+      .remove(id)
+      .then(
+        setPersons(persons.filter(n => n.id !== id))
+      ) 
   }
 
   return (
@@ -29,7 +33,7 @@ const App = () => {
       
       <Search filter={filter} setFilter={setFilter}/>
       <AddNewPerson persons={persons} setPersons={setPersons} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber}/>
-      <Phonebook persons={persons} setPersons={setPersons} filter={filter}/>
+      <Phonebook persons={persons} toggleButton={toggleDeleteButton} filter={filter}/>
     </div>
   )
 }
