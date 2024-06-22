@@ -20,12 +20,16 @@ const App = () => {
       })
   },[])
 
+  const toggleDeleteButton = id => {
+    phonebookService.remove(id)
+  }
+
   return (
     <div>
       
       <Search filter={filter} setFilter={setFilter}/>
       <AddNewPerson persons={persons} setPersons={setPersons} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber}/>
-      <Phonebook persons={persons} filter={filter}/>
+      <Phonebook persons={persons} setPersons={setPersons} filter={filter}/>
     </div>
   )
 }
