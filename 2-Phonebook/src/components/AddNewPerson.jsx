@@ -1,6 +1,6 @@
 import phonebookService from "../services/phonebook"
 
-const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setNewNumber, setMessage}) => {
+const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setNewNumber, notificationMessage}) => {
     
     const addNewPerson = (event) => {
         event.preventDefault()
@@ -12,12 +12,8 @@ const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setN
             .create(personObject)
             .then(returnedPerson => {
               setPersons(persons.concat(returnedPerson))
-              setMessage({message:`Added ${newName}`,
-                          error: false})
-              setTimeout(()=>{
-                setMessage({message: null,
-                            error: null})
-              },5000)
+              const messageObject = { message:`Added ${newName}`, error: false}
+              notificationMessage(messageObject)
               setNewName('')
               setNewNumber('')
               
@@ -40,6 +36,7 @@ const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setN
         }
         
       }
+
     
       const duplicateFound = () => {
         const check = persons.filter((person) => person.name === newName)

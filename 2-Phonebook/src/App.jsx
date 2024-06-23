@@ -28,7 +28,23 @@ const App = () => {
       .remove(id)
       .then(
         setPersons(persons.filter(n => n.id !== id))
-      ) 
+      )
+      .catch(error => {
+        if (error.response.status === 404){
+          const person = persons.filter(n => n.id === id)
+          console.log(person)
+          const messageObject = {message: `Information of ${person[0].name} has already been removed from server`, error: true}
+          notificationMessage(messageObject)
+        }
+      }) 
+  }
+
+  const notificationMessage = (message) => {
+    setMessage(message)
+    setTimeout(()=>{
+    setMessage({message: null,
+                error: null})
+    },5000)
   }
 
 
@@ -44,7 +60,7 @@ const App = () => {
                     setNewName={setNewName} 
                     newNumber={newNumber} 
                     setNewNumber={setNewNumber}
-                    setMessage={setMessage}
+                    notificationMessage={notificationMessage}
                     />
       <Phonebook persons={persons} toggleButton={toggleDeleteButton} filter={filter}/>
     </div>
