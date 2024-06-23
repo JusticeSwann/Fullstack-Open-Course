@@ -1,5 +1,3 @@
-//import Part from "./components/Part"
-//import Redux from "./components/Redux"
 import Course from "./components/Course"
 
 const App = () => {
@@ -58,16 +56,6 @@ const App = () => {
       }
     </div>
   )
-
-  // return(
-  //   <div>
-  //     <h1>{course.name}</h1>
-  //       {course.parts.map(part => (
-  //             <Course key={part.id} part={part}/>
-  //           ))}
-  //     <Redux parts={course.parts}/>
-  //   </div>
-  // )
 
 }
 

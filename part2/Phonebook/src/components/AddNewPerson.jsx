@@ -33,8 +33,7 @@ const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setN
           }else{
             console.log('no')
           }
-        }
-        
+        } 
       }
 
     
