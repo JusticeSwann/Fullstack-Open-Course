@@ -1,6 +1,6 @@
 import phonebookService from "../services/phonebook"
 
-const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setNewNumber}) => {
+const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setNewNumber, setMessage}) => {
     
     const addNewPerson = (event) => {
         event.preventDefault()
@@ -12,8 +12,15 @@ const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setN
             .create(personObject)
             .then(returnedPerson => {
               setPersons(persons.concat(returnedPerson))
-              setNewName=''
-              setNewNumber=''
+              setMessage({message:`Added ${newName}`,
+                          error: false})
+              setTimeout(()=>{
+                setMessage({message: null,
+                            error: null})
+              },5000)
+              setNewName('')
+              setNewNumber('')
+              
             })
         }else{
           if (confirm(`${newName} is already added to phonebook. would you like to update their number?`)){
@@ -24,6 +31,8 @@ const AddNewPerson = ({persons, setPersons, newName, setNewName, newNumber, setN
               .update(id,personObject)
               .then(returnedPerson =>{
                 setPersons(persons.filter(n => n.id !== id).concat(returnedPerson))
+                setNewName('')
+                setNewNumber('')
             })
           }else{
             console.log('no')

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import AddNewPerson from './components/AddNewPerson'
 import Phonebook from './components/Phonebook'
 import Search from './components/Search'
+import Notification from './components/Notification'
 import phonebookService from './services/phonebook'
 
 const App = () => {
@@ -9,6 +10,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [message, setMessage] = useState({})
+
 
   useEffect(() => {
     console.log('Effect')
@@ -28,11 +31,21 @@ const App = () => {
       ) 
   }
 
+
+
+
   return (
     <div>
-      
+      <Notification message={message}/>
       <Search filter={filter} setFilter={setFilter}/>
-      <AddNewPerson persons={persons} setPersons={setPersons} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber}/>
+      <AddNewPerson persons={persons} 
+                    setPersons={setPersons} 
+                    newName={newName} 
+                    setNewName={setNewName} 
+                    newNumber={newNumber} 
+                    setNewNumber={setNewNumber}
+                    setMessage={setMessage}
+                    />
       <Phonebook persons={persons} toggleButton={toggleDeleteButton} filter={filter}/>
     </div>
   )
